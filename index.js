@@ -16,6 +16,7 @@
  * @param rawParams {string} Obtiene los parametros enviados atraves de la url.
  * @param coord     {array}  Tupla que contiene la latitud y la longitud. [lat,long].
  * @param obj       {Object} Objeto que contiene los datos de rawParams en formato clave-valor.
+ * @param url       {string} Cadena con que contiene la url de Google Maps de la ubicación en la RULA.
  */
 class RULA {
     constructor() {
@@ -32,6 +33,7 @@ class RULA {
         this.DrawTable();
         this.GetLatLong();
         this.DrawMap();
+        this.Redirect();
     }
 
     GetLatLong() {
@@ -71,39 +73,30 @@ class RULA {
     }
 
     DrawTable() {
-        const trValues = document.querySelector('#result-data');
-        this.obj.forEach((val) => {
-            const td = document.createElement('td');
-            td.textContent = val;
-            trValues.appendChild(td);
+        const tbody = document.querySelector('#result-data');
+        this.obj.forEach((val, key) => {
+            const trVal = document.createElement('tr');
+            const tdKey = document.createElement('td');
+            const tdVal = document.createElement('td');
+            tdKey.textContent = key.toUpperCase();
+            tdVal.textContent = val.toUpperCase();
+            trVal.append(tdKey, tdVal);
+            tbody.appendChild(trVal);
         });
     }
 
     DrawMap() {
-        // const cm = new CustomMap();
-        // cm.Draw(this.coord);
         const mapCont = document.querySelector('#map');
         const iframe = document.createElement('iframe');
-        // iframe.src = `https://www.google.com.mx/maps/@${this.coord[0]},${this.coord[1]},19z`;
-        iframe.src = `https://maps.google.com/maps?q=+${this.coord[0]}+,+${this.coord[1]}+&hl=es&z=19&amp&output=embed`;
+        this.url = `https://www.google.com.mx/maps/@${this.coord[0]},${this.coord[1]},19z`;
+        iframe.src = `https://maps.google.com/maps?q=${this.coord[0]},${this.coord[1]}&hl=es&z=19&amp&output=embed`;
         mapCont.appendChild(iframe)
     }
-}
 
-class CustomMap {
-    Draw(coord) {
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZHdpZ3RoIiwiYSI6ImNraG50c2VzMzF2bXQyd3BoZW50Z25ocTYifQ.rR--pjoiumjCFi0i7wRsYQ';
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [coord[1], coord[0]],
-            zoom: 18
-        });
-
-        const marker = new mapboxgl.Marker()
-            .setLngLat([coord[1], coord[0]])
-            .addTo(map);
+    Redirect() {
+        const a = document.querySelector('#gmaps');
+        a.href = this.url;
     }
 }
 
-new RULA();
+const app = new RULA();

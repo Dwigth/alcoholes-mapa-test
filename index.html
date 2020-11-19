@@ -5,33 +5,41 @@
     <meta charset="utf-8" />
     <title>Add a default marker</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <h1>Informacion de Alcoholes</h1>
-    <div class="information">
-        <table aria-describedby="Información" class="styled-table">
-            <thead>
-                <tr>
-                    <th>RFC</th>
-                    <th>Licenciatario</th>
-                    <th>Licencia</th>
-                    <th>Giro</th>
-                    <th>Domicilia</th>
-                    <th>Rula</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="result-data" class="active-row">
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="mapcontainer">
-        <div id="map"></div>
+    <div class="container">
+        <h1>Informacion de Alcoholes</h1>
+        <div class="row">
+
+            <div class="info">
+                <div class="img">
+                    <img src="" alt="">
+                </div>
+                <div style="overflow-x:auto;">
+                    <table aria-describedby="Información" class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Datos</th>
+                                <th>Valores</th>
+                            </tr>
+                        </thead>
+                        <tbody id="result-data" class="active-row">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <a id="gmaps" href="">Ver en Google Maps</a>
+
+            <div id="map"></div>
+        </div>
+
+
+
     </div>
     <script src="./index.js"></script>
 </body>
