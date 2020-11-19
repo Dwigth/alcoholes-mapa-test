@@ -1,7 +1,7 @@
 body { margin: 0; padding: 0; }
 .information {  width: 100%; height: 250px; padding: 20px;}
 .mapcontainer { width: 100%;}
-#map { position: absolute; top:300px; bottom: 0; width: 100%; }
+iframe { position: absolute; top:300px; bottom: 0; width: 90%; height: 50%; }
 
 .styled-table {
   border-collapse: collapse;

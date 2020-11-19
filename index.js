@@ -10,7 +10,7 @@
  * @17.549286, -92.947944
  * 
  * rula: 4 Primeros Digitos RFC - Licencia  10 Caracteres - Giro (2Letras) - LATITUD - LONGITUD
-																EXMPLE:	LA P 17 D 549286  LO M 92 D 947944 EC = 17.549286, -92.947944
+                                                                EXMPLE:	LA P 17 D 549286  LO M 92 D 947944 EC = 17.549286, -92.947944
  * IUAA0000LA2500MSLAP17D549286LOM92D947944EC12345
  * 
  * @param rawParams {string} Obtiene los parametros enviados atraves de la url.
@@ -21,32 +21,31 @@ class RULA {
     constructor() {
         this.coord = [0, 0];
         this.obj = new Map();
-        this.rawParams = window.location.search.substr(1);  
+        this.rawParams = window.location.search.substr(1);
         var data;
         if (this.rawParams.length == 0) {
             alert('No se han encontrado parametros en la URL.');
             return;
         }
-        
+
         this.FormatParams();
         this.DrawTable();
         this.GetLatLong();
         this.DrawMap();
     }
 
-    GetLatLong() {        
+    GetLatLong() {
         var rula = this.obj.get("rula")
-        let temp = rula.slice(16, rula.length); 
-        temp = temp.slice(2, 26);       
-        let cordenadas = temp.split("LO");       
+        let temp = rula.slice(16, rula.length);
+        temp = temp.slice(2, 26);
+        let cordenadas = temp.split("LO");
         let latitud = cordenadas[0];
-        let longitud = cordenadas [1];       
+        let longitud = cordenadas[1];
 
-        if (longitud.indexOf('EC')!= -1)
-        {
+        if (longitud.indexOf('EC') != -1) {
             longitud = longitud.replace('EC', '');
-        }        
-                
+        }
+
         //Formatear 
         longitud = longitud.replace('P', '');
         longitud = longitud.replace('M', '-');
@@ -81,8 +80,13 @@ class RULA {
     }
 
     DrawMap() {
-        const cm = new CustomMap();
-        cm.Draw(this.coord);
+        // const cm = new CustomMap();
+        // cm.Draw(this.coord);
+        const mapCont = document.querySelector('#map');
+        const iframe = document.createElement('iframe');
+        // iframe.src = `https://www.google.com.mx/maps/@${this.coord[0]},${this.coord[1]},19z`;
+        iframe.src = `https://maps.google.com/maps?q=+${this.coord[0]}+,+${this.coord[1]}+&hl=es&z=19&amp&output=embed`;
+        mapCont.appendChild(iframe)
     }
 }
 
