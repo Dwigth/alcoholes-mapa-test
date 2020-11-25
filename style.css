@@ -14,11 +14,15 @@ h1 {
 }
 
 .info > div {
-  width: 45%;
+  width: 47%;
 }
 
 .img {
-
+  width: 555px;
+  height:555px; 
+  border:2px solid black; 
+  float: right; 
+  margin: 0px 50px 15px 0px;
 }
 
 iframe { 

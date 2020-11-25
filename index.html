@@ -11,14 +11,16 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Informacion de Alcoholes</h1>
+    <div class="container" style="width:80% !important; margin: 0 auto;  margin-bottom: 30px;">
+        <h1>Información de Alcoholes</h1>
         <div class="row">
 
             <div class="info">
-                <div class="img">
-                    <img src="" alt="">
+                <div>
+                  <img src="default-placeholder.png" class="img" alt="Local">
+                  
                 </div>
+               
                 <div style="overflow-x:auto;">
                     <table aria-describedby="Información" class="styled-table">
                         <thead>
@@ -31,14 +33,19 @@
                         </tbody>
                     </table>
                 </div>
+                
             </div>
+            
 
-            <a id="gmaps" href="">Ver en Google Maps</a>
+           
 
-            <div id="map"></div>
+           
         </div>
-
-
+        
+        
+        <div id="map" style="width:87%; margin: 0 auto;  margin-bottom: 30px;">
+            <button  onclick=""> <img src="Google-Maps_Icon.png" alt="imagen" style="width: 70px; height:70px;"></button>
+            <a id="gmaps" href="">Ver en Google Maps</a></div>
 
     </div>
     <script src="./index.js"></script>

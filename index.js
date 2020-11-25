@@ -37,7 +37,7 @@ class RULA {
     }
 
     GetLatLong() {
-        var rula = this.obj.get("rula")
+        var rula = this.obj.get("RULA")
         let temp = rula.slice(16, rula.length);
         temp = temp.slice(2, 26);
         let cordenadas = temp.split("LO");
