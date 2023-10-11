@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import googleMapsIcon from "./assets/google-maps-icon.png"
 import defaultPlaceholder from "./assets/default-placeholder.png"
+import Map from './Map';
 import './App.css'
 
 const Container = styled.div`
@@ -29,17 +29,7 @@ box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 margin-bottom: 50px;
 `;
 
-const Map = styled.div`
-width:100%; margin: 0 auto;  margin-bottom: 30px;
-`;
 
-const GoogleMapIcon = styled.img`
-width: 70px; height:70px;
-`;
-
-const MapHyperlink = styled.a`
-
-`;
 
 const DefaultPlaceholderImage = styled.img`
 width: 100%;
@@ -49,6 +39,10 @@ margin-bottom: 10px;
 `;
 
 function App() {
+
+  useEffect(() => {
+
+  }, [])
 
   return (
     <>
@@ -75,14 +69,7 @@ function App() {
 
 
           <div className="col-12">
-
-
-            <Map id="map">
-              <a id="gmaps">
-                <GoogleMapIcon src={googleMapsIcon} alt="imagen" />
-              </a>
-
-            </Map>
+            <Map coordinates={{ latitude: 17.9745058, longitude: -92.9254304 }} zoomLevel={16}></Map>
           </div>
 
 
