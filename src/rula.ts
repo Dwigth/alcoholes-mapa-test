@@ -40,7 +40,7 @@ export class Rula {
         this.isValid = true;
 
         this.structureParams();
-        this.getLatLong();
+        this.coordinates = this.getCoordinates();
     }
 
     private getRula(rulaStr: string): string {
@@ -48,32 +48,25 @@ export class Rula {
         return (rulaStr.slice(initialPosition, rulaStr.length)).slice(start, end)
     }
 
-    private getLatLong() {
+    private getCoordinates(): Coordinates {
         const rulaStr = this.uriParameters.get("rula")!
         const rula = this.getRula(rulaStr);
-        const coordenadas = rula.split("LO");
-        let latitud = coordenadas[0];
-        let longitud = coordenadas[1];
+        const coordinates = rula.split("LO");
+        let latitude = coordinates[0];
+        let longitude = coordinates[1];
 
-        if (longitud.indexOf('EC') != -1) {
-            longitud = longitud.replace('EC', '');
+        if (longitude.indexOf('EC') != -1) {
+            longitude = longitude.replace('EC', '');
         }
 
         //Formatear 
-        longitud = longitud.replace('P', '');
-        longitud = longitud.replace('M', '-');
-        longitud = longitud.replace('D', '.');
+        longitude.replace('P', '').replace('M', '-').replace('D', '.');
+        latitude.replace('P', '').replace('M', '-').replace('D', '.');
 
-        latitud = latitud.replace('P', '');
-        latitud = latitud.replace('M', '-');
-        latitud = latitud.replace('D', '.');
-
-        this.coordinates = {
-            latitude: Number(latitud),
-            longitude: Number(longitud)
+        return {
+            latitude: Number(latitude),
+            longitude: Number(longitude)
         }
-
-        return this.coordinates;
     }
 
     private structureParams() {
