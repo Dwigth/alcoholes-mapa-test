@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import defaultPlaceholder from "./assets/default-placeholder.png"
 import Map from './Map';
 import './App.css'
+import { Rula } from './rula';
+import { ZOOM_LEVEL } from './constants';
 
 const Container = styled.div`
 width: 80% !important;
@@ -39,10 +41,8 @@ margin-bottom: 10px;
 `;
 
 function App() {
-
-  useEffect(() => {
-
-  }, [])
+  const { search } = window.location;
+  const rula = new Rula(search);
 
   return (
     <>
@@ -69,7 +69,7 @@ function App() {
 
 
           <div className="col-12">
-            <Map coordinates={{ latitude: 17.9745058, longitude: -92.9254304 }} zoomLevel={16}></Map>
+            <Map coordinates={rula.coordinates} zoomLevel={ZOOM_LEVEL}></Map>
           </div>
 
 

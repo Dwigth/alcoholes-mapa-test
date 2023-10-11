@@ -28,11 +28,11 @@ export class Rula {
         longitude: 0
     };
 
-    uriParameters = new Map<string, string>();
-    rawParams: string = '';
+    private uriParameters = new Map<string, string>();
+    private rawParams: string = '';
 
-    constructor() {
-        this.rawParams = window.location.search.substring(1);
+    constructor(search: string) {
+        this.rawParams = search.substring(1);
         if (this.rawParams.length == 0) {
             alert('No se han encontrado parametros en la URL.');
             return;
@@ -47,7 +47,7 @@ export class Rula {
         return (rulaStr.slice(initialPosition, rulaStr.length)).slice(start, end)
     }
 
-    getLatLong() {
+    private getLatLong() {
         const rulaStr = this.uriParameters.get("RULA")!
         const rula = this.getRula(rulaStr);
         const coordenadas = rula.split("LO");
@@ -71,20 +71,17 @@ export class Rula {
             latitude: Number(latitud),
             longitude: Number(longitud)
         }
+
+        return this.coordinates;
     }
 
-    formatParams() {
+    private formatParams() {
         const rawParams = decodeURI(this.rawParams);
         const searchParams = new URLSearchParams(rawParams);
 
         for (let params of searchParams) {
-            console.log(params);
+            const [paramName, paramValue] = params;
+            this.uriParameters.set(paramName, paramValue)
         }
-
-        /*  const formatArr = str.split('&');
-         formatArr.forEach(param => {
-             const result = param.split('=');
-             this.uriParameters.set(result[0], result[1]);
-         }); */
     }
 }
