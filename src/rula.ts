@@ -1,5 +1,6 @@
 import { RULA_STRING_POSITION } from "./constants";
 import { Coordinates, LicenseInformation } from "./types";
+import { isNil } from "./util";
 
 /**
  * @description Se debe obtener la información através de los parametros GET.
@@ -33,14 +34,17 @@ export class Rula {
     private rawParams: string = '';
 
     constructor(search: string) {
+        if (isNil(search)) {
+            return;
+        }
+
         this.rawParams = search.substring(1);
         if (this.rawParams.length == 0) {
             return;
         }
-        this.isValid = true;
-
         this.structureParams();
         this.coordinates = this.getCoordinates();
+        this.isValid = true;
     }
 
     private getRula(rulaStr: string): string {
@@ -60,12 +64,12 @@ export class Rula {
         }
 
         //Formatear 
-        longitude.replace('P', '').replace('M', '-').replace('D', '.');
-        latitude.replace('P', '').replace('M', '-').replace('D', '.');
+        const formatedLongitude = longitude.replace('P', '').replace('M', '-').replace('D', '.');
+        const formatedLatitude = latitude.replace('P', '').replace('M', '-').replace('D', '.');
 
         return {
-            latitude: Number(latitude),
-            longitude: Number(longitude)
+            latitude: Number(formatedLongitude),
+            longitude: Number(formatedLatitude)
         }
     }
 
