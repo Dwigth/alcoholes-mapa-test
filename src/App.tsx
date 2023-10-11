@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import defaultPlaceholder from "./assets/default-placeholder.png"
 import Map from './Map';
-import './App.css'
 import { Rula } from './rula';
 import { ZOOM_LEVEL } from './constants';
 import BadRequest from './BadRequest';
@@ -41,6 +39,10 @@ border: 2px solid black;
 margin-bottom: 10px;
 `;
 
+const AppTitle = styled.h1`
+color: #777;
+`;
+
 function App() {
   const title = 'Información relacionada a licencias de alcohol';
   const { search } = window.location;
@@ -48,15 +50,15 @@ function App() {
 
   return (
     <>
-      <Container>
-        <h1>{title}</h1>
-        {rula.isValid ? <Row>
+      <Container className='container'>
+        <AppTitle>{title}</AppTitle>
+        {rula.isValid ? <Row className='row'>
 
-          <div className="imgcont col-12 col-lg-6">
+          <div className="six columns">
             <DefaultPlaceholderImage src={defaultPlaceholder} alt="Local" />
           </div>
 
-          <OverflowContainer className="col-12 col-lg-6" >
+          <OverflowContainer className="six columns" >
             <Table aria-describedby="Información" >
               <thead>
                 <tr>
@@ -69,10 +71,7 @@ function App() {
             </Table>
           </OverflowContainer>
 
-
-          <div className="col-12">
-            <Map coordinates={rula.coordinates} zoomLevel={ZOOM_LEVEL}></Map>
-          </div>
+          <Map coordinates={rula.coordinates} zoomLevel={ZOOM_LEVEL}></Map>
 
 
         </Row> : <BadRequest />}
