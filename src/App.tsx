@@ -5,6 +5,7 @@ import Map from './Map';
 import './App.css'
 import { Rula } from './rula';
 import { ZOOM_LEVEL } from './constants';
+import BadRequest from './BadRequest';
 
 const Container = styled.div`
 width: 80% !important;
@@ -41,14 +42,15 @@ margin-bottom: 10px;
 `;
 
 function App() {
+  const title = 'Información relacionada a licencias de alcohol';
   const { search } = window.location;
   const rula = new Rula(search);
 
   return (
     <>
       <Container>
-        <h1>Información de Alcoholes</h1>
-        <Row>
+        <h1>{title}</h1>
+        {rula.isValid ? <Row>
 
           <div className="imgcont col-12 col-lg-6">
             <DefaultPlaceholderImage src={defaultPlaceholder} alt="Local" />
@@ -73,8 +75,8 @@ function App() {
           </div>
 
 
-        </Row>
-      </Container>
+        </Row> : <BadRequest />}
+      </Container >
     </>
   )
 }

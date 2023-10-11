@@ -27,6 +27,7 @@ export class Rula {
         latitude: 0,
         longitude: 0
     };
+    isValid: boolean = false;
 
     private uriParameters = new Map<string, string>();
     private rawParams: string = '';
@@ -34,15 +35,15 @@ export class Rula {
     constructor(search: string) {
         this.rawParams = search.substring(1);
         if (this.rawParams.length == 0) {
-            alert('No se han encontrado parametros en la URL.');
             return;
         }
+        this.isValid = true;
 
-        this.formatParams();
+        this.structureParams();
         this.getLatLong();
     }
 
-    private getRula(rulaStr: string) {
+    private getRula(rulaStr: string): string {
         const { initialPosition, start, end } = RULA_STRING_POSITION;
         return (rulaStr.slice(initialPosition, rulaStr.length)).slice(start, end)
     }
@@ -75,7 +76,7 @@ export class Rula {
         return this.coordinates;
     }
 
-    private formatParams() {
+    private structureParams() {
         const rawParams = decodeURI(this.rawParams);
         const searchParams = new URLSearchParams(rawParams);
 
