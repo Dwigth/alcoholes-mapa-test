@@ -1,10 +1,10 @@
 import { RULA_STRING_POSITION } from "./constants";
-import { Coordinates } from "./types";
+import { Coordinates, LicenseInformation } from "./types";
 
 /**
  * @description Se debe obtener la información através de los parametros GET.
  * @example rfc=&licenciatario=&licencia=&domicilio=&rula=
- * @example ?rfc=asdadasdad&licenciatario=Hola&licencia=sdgdgfsdfg&domicilio=17.549286,-92.947944&RULA=IUAA0000LA2500MSLAP17D549286LOM92D947944EC12345
+ * @example ?rfc=IUAA&licenciatario=Micheladas%20El%20Capi&licencia=0000LA2500&domicilio=Manuel%20A.%20Jimenez%20113,%20Centro,%2086800%20Teapa,Tab.&rula=IUAA0000LA2500MSLAP17D549286LOM92D947944EC12345
  * 
  * RFC
  * nombre licenciatario
@@ -49,7 +49,7 @@ export class Rula {
     }
 
     private getLatLong() {
-        const rulaStr = this.uriParameters.get("RULA")!
+        const rulaStr = this.uriParameters.get("rula")!
         const rula = this.getRula(rulaStr);
         const coordenadas = rula.split("LO");
         let latitud = coordenadas[0];
@@ -83,6 +83,16 @@ export class Rula {
         for (let params of searchParams) {
             const [paramName, paramValue] = params;
             this.uriParameters.set(paramName, paramValue)
+        }
+    }
+
+    getLicenseData(): LicenseInformation {
+        return {
+            address: this.uriParameters.get('domicilio')!,
+            license: this.uriParameters.get('licencia')!,
+            licenseName: this.uriParameters.get('licenciatario')!,
+            rfc: this.uriParameters.get('rfc')!,
+            rula: this.uriParameters.get('rula')!
         }
     }
 }

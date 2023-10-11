@@ -4,6 +4,7 @@ import Map from './Map';
 import { Rula } from './rula';
 import { ZOOM_LEVEL } from './constants';
 import BadRequest from './BadRequest';
+import LicenseTable from './LicenseTable';
 
 const Container = styled.div`
 width: 80% !important;
@@ -18,19 +19,6 @@ const Row = styled.div`
 const OverflowContainer = styled.div`
 overflow-x:auto;
 `;
-
-const Table = styled.table`
-border-collapse: collapse;
-/* margin: 25px 25px; */
-border-spacing: 0;
-font-size: 0.9em;
-/* font-family: sans-serif; */
-width: 100%;
-box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-margin-bottom: 50px;
-`;
-
-
 
 const DefaultPlaceholderImage = styled.img`
 width: 100%;
@@ -59,16 +47,7 @@ function App() {
           </div>
 
           <OverflowContainer className="six columns" >
-            <Table aria-describedby="Información" >
-              <thead>
-                <tr>
-                  <th>Datos</th>
-                  <th>Valores</th>
-                </tr>
-              </thead>
-              <tbody id="result-data" className="active-row">
-              </tbody>
-            </Table>
+            <LicenseTable licenseData={rula.getLicenseData()} />
           </OverflowContainer>
 
           <Map coordinates={rula.coordinates} zoomLevel={ZOOM_LEVEL}></Map>
