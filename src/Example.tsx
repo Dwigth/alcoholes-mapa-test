@@ -6,7 +6,7 @@ cursor: pointer;
 `;
 
 function Example() {
-    const uri = '?rfc=IUAA&licenciatario=Micheladas%20El%20Capi&licencia=0000LA2500&domicilio=Manuel%20A.%20Jimenez%20113,%20Centro,%2086800%20Teapa,Tab.&rula=IUAA0000LA2500MSLAP17D549286LOM92D947944EC12345';
+    const uri = '?rfc=XAXX010101000&licenciatario=Micheladas%20El%20Capi&licencia=0000LA2500&domicilio=Manuel%20A.%20Jimenez%20113,%20Centro,%2086800%20Teapa,Tab.&rula=IUAA0000LA2500MSLAP17D549286LOM92D947944EC12345';
 
     function onUrlClick() {
         const url = new URL(window.location.href);

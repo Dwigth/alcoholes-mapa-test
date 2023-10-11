@@ -33,7 +33,7 @@ function LicenseTable(props: { licenseData: LicenseInformation }) {
                 </thead>
                 <tbody className="active-row">
                     {Object.keys(props.licenseData).map((key, index) => (
-                        <tr>
+                        <tr key={index}>
                             <td><strong>{tableDictionary.get(key)}</strong></td>
                             <td>{values[index]}</td>
                         </tr>

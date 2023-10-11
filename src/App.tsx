@@ -40,7 +40,7 @@ function App() {
     // Define una función para manejar los eventos de navegación.
     const handleNavigation = () => {
       // Realiza las actualizaciones necesarias en la aplicación cuando la URL cambia.
-      console.log('URL cambiada:', window.location.pathname);
+      //console.log('URL cambiada:', window.location.pathname);
       setRula(new Rula(window.location.search));
     };
 
