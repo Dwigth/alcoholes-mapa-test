@@ -5,6 +5,7 @@ import { Rula } from './rula';
 import { ZOOM_LEVEL } from './constants';
 import BadRequest from './BadRequest';
 import LicenseTable from './LicenseTable';
+import { useEffect, useState } from 'react';
 
 const Container = styled.div`
 width: 80% !important;
@@ -33,8 +34,25 @@ color: #777;
 
 function App() {
   const title = 'Información relacionada a licencias de alcohol';
-  const { search } = window.location;
-  const rula = new Rula(search);
+  const [rula, setRula] = useState(new Rula(window.location.search));
+
+  useEffect(() => {
+    // Define una función para manejar los eventos de navegación.
+    const handleNavigation = () => {
+      // Realiza las actualizaciones necesarias en la aplicación cuando la URL cambia.
+      console.log('URL cambiada:', window.location.pathname);
+      setRula(new Rula(window.location.search));
+    };
+
+    // Agrega un event listener para el evento "popstate" del navegador.
+    window.addEventListener('popstate', handleNavigation);
+
+    // Asegúrate de eliminar el event listener cuando el componente se desmonta.
+    return () => {
+      window.removeEventListener('popstate', handleNavigation);
+    };
+  }, []);
+
 
   return (
     <>
