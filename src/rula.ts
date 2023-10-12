@@ -56,11 +56,11 @@ export class Rula {
         const rulaStr = this.uriParameters.get("rula")!
         const rula = this.getRula(rulaStr);
         const coordinates = rula.split("LO");
-        let latitude = coordinates[0];
-        let longitude = coordinates[1];
+        let latitude = coordinates[1];
+        let longitude = coordinates[0];
 
-        if (longitude.indexOf('EC') != -1) {
-            longitude = longitude.replace('EC', '');
+        if (latitude.indexOf('EC') != -1) {
+            latitude = latitude.replace('EC', '');
         }
 
         //Formatear 
